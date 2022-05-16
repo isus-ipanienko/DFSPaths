@@ -26,12 +26,12 @@ struct DFSContext {
     int paths;
 
     DFSContext(DiGraph const &graph) {
-        this->onPath = (bool*) calloc(graph.vertices.size(), sizeof(bool));
-        this->paths = 0;
+        onPath = (bool*) calloc(graph.vertices.size(), sizeof(bool));
+        paths = 0;
     }
 
     ~DFSContext() {
-        free(this->onPath);
+        free(onPath);
     }
 };
 
