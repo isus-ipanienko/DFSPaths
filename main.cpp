@@ -12,9 +12,9 @@ class DiGraph {
 public:
     vector<vector<int>> vertices;
 
-    DiGraph(vector<DiEdge> const &edges, int n)
+    DiGraph(vector<DiEdge> const &edges, int vertexCount)
     {
-        vertices.resize(n);
+        vertices.resize(vertexCount);
         for (const DiEdge &edge: edges) {
             vertices[edge.from].push_back(edge.to);
         }
