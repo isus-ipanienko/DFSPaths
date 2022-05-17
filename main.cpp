@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
     int start = atoi(argv[1]);
     int end = atoi(argv[2]);
 
-    if ((start > vertexCount) || (end > vertexCount)) {
+    if ((start < 0) || (end < 0) || (start >= vertexCount) || (end >= vertexCount)) {
         cout << "ERROR: Start or end out of range! Number of vertices: " << vertexCount << "\n";
         return -1;
     }
