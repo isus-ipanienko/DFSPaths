@@ -30,7 +30,7 @@ struct DFSContext {
 
     DFSContext(DiGraph const &graph) : dfsGraph(graph) {
         onPath = (bool*) calloc(graph.vertices.size(), sizeof(bool));
-        verticesOnPath = 0;
+        verticesOnPath = -1; /* -1 to avoid counting the first node */
         paths = 0;
     }
 
@@ -41,7 +41,7 @@ struct DFSContext {
 
 void DFSPaths(DFSContext &ctx, int start, int end) {
     if (start == end) {
-        ctx.paths += (1 << (ctx.verticesOnPath - 1)); /* -1 since you need to visit the first node */
+        ctx.paths += (1 << ctx.verticesOnPath);
     }
     else {
         ctx.onPath[start] = true;
@@ -108,6 +108,11 @@ int main(int argc, char *argv[]) {
 
     int start = atoi(argv[2]);
     int end = atoi(argv[3]);
+
+    if (start == end) {
+        std::cout << "ERROR: The start vertex is the same as the end vertex!\n";
+        return -2;
+    }
 
     if ((start < 0) || (end < 0) || (start >= vertexCount) || (end >= vertexCount)) {
         std::cout << "ERROR: Vertex out of range! Number of vertices: " << vertexCount << "\n";
